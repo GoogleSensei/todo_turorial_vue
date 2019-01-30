@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <router-view/>
+    <h1>Todo tutorial</h1>
+    <hr />
+    <router-view></router-view>
   </div>
 </template>
 
