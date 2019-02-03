@@ -9,7 +9,8 @@
     </form>
     <div class="task-list">
       <label class="task-list__item" 
-             v-for="todo in todos" :key="todo.id">
+             v-for="todo in todos" :key="todo.id"
+             v-bind:class="{ 'task-list__item--checked': todo.done}">
         <input type="checkbox" v-model="todo.done">
         <input type="checkbox" v-model="todo.editing">
         <input v-if="todo.editing" v-model="todo.text" @keyup.enter="todo.editing = !todo.editing">
@@ -76,6 +77,7 @@ export default {
     &--checked {
       @extend #{$element};
       color: #85a6c6;
+      text-decoration: line-through
     }
   }
 }
