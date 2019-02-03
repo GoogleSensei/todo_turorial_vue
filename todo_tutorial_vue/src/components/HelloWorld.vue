@@ -10,7 +10,10 @@
     <div class="task-list">
       <label class="task-list__item" 
              v-for="todo in todos" :key="todo.id">
-        <input type="checkbox"><button>EDIT</button>{{ todo.text }}
+        <input type="checkbox" v-model="todo.done">
+        <input type="checkbox" v-model="todo.editing">
+        <input v-if="todo.editing" v-model="todo.text" @keyup.enter="todo.editing = !todo.editing">
+        <span v-else>{{ todo.text }}</span>
       </label>
     </div>
   </div>
@@ -23,23 +26,24 @@ export default {
     return {
       msg: 'Welcome to Your Vue.js App',
       todos : [
-        {text : 'vue-router', done: false},
-        {text : 'vuex', done: false},
-        {text : 'vue-loader', done: false},
-        {text : 'awesome-vue', done: true },
+        {text : 'vue-router', done: false, editing: false},
+        {text : 'vuex', done: false, editing: false},
+        {text : 'vue-loader', done: false, editing: false},
+        {text : 'awesome-vue', done: true, editing: false},
       ],
       newTodo:""
     }
   },
   methods: {
-    addTodo: function(event) {
+    addTodo: function (event) {
       let text = this.newTodo && this.newTodo.trim()
       if(!text) {
         return
       }
       this.todos.push({
         text: text,
-        done: false
+        done: false,
+        editing: false
       })
       this.newTodo = ''
     },
