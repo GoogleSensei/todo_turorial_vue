@@ -2,8 +2,8 @@
   <div>
     {{ msg }}
     <form>
-      <button v-on:click="addTodo()">ADD TASK</button>
-      <button>DELETE FINISHED TASKS</button>
+      <button @click="addTodo()">ADD TASK</button>
+      <button @click="removeTodo()">DELETE FINISHED TASKS</button>
       <p>input: <input type="text" v-model="newTodo"></p>
       <p>task: {{newTodo}}</p>
     </form>
@@ -43,6 +43,11 @@ export default {
       })
       this.newTodo = ''
     },
+    removeTodo: function (event) {
+      for (let i = this.todos.length - 1; i >= 0; i--) {
+        if (this.todos[i].done) this.todos.splice(i, 1)
+      }
+    }
   }
 }
 </script>
